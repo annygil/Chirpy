@@ -46,9 +46,9 @@ func main() {
 	}
 	apiCfg := &apiConfig{}
 	//mux.HandleFunc("/users", customHandler)
-	mux.HandleFunc("/healthz", customHandler)
+	mux.HandleFunc("GET /healthz", customHandler)
 
-	mux.Handle("/metrics", apiCfg.middlewareLog(http.StripPrefix("/metrics", http.FileServer(http.Dir(".")))))
+	mux.Handle("GET /metrics", apiCfg.middlewareLog(http.StripPrefix("/metrics", http.FileServer(http.Dir(".")))))
 	mux.Handle("/reset", apiCfg.middlewareMetricsReset(http.StripPrefix("/reset", http.FileServer(http.Dir(".")))))
 	mux.Handle("/app/*", apiCfg.middlewareMetricsInc(http.StripPrefix("/app", http.FileServer(http.Dir(".")))))
 	mux.Handle("/assets", http.FileServer(http.Dir("./assets/")))
