@@ -13,6 +13,7 @@ func main() {
 		Handler: mux,
 	}
 	mux.Handle("/", http.FileServer(http.Dir(".")))
+	mux.Handle("/assets", http.FileServer(http.Dir("./assets/")))
 	//Use the server's ListenAndServe method to start the server
 	srv.ListenAndServe()
 
