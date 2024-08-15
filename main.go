@@ -12,6 +12,7 @@ func main() {
 		Addr:    ":8080",
 		Handler: mux,
 	}
+	mux.Handle("/", http.FileServer(http.Dir(".")))
 	//Use the server's ListenAndServe method to start the server
 	srv.ListenAndServe()
 
